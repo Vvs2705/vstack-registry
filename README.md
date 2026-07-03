@@ -9,6 +9,7 @@ Registry [shadcn](https://ui.shadcn.com/docs/registry/github) da **V-STACK Solut
 | Item | Tipo | Descricao | Instalar |
 |---|---|---|---|
 | `design-conventions` | `registry:item` | `DESIGN.md` na raiz do projeto consumidor (`~/DESIGN.md`) — brief de restricoes de design: tokens semanticos (accent `#e05e18`), tipografia Syne/Geist/JetBrains Mono, regras de raio/sombra/motion e o guia de prompt para agentes. | `npx shadcn@latest add Vvs2705/vstack-registry/design-conventions` |
+| `theme-base` | `registry:theme` | **Instale primeiro.** Injeta os design tokens da V-STACK (`--bg*`, `--accent*` incl. `--accent-muted`, `--text-1..3`, `--border*`, `--radius-*`, sombras e tokens de estado `success`/`warning`/`danger`/`info`) em **light e dark**, mais as utilities que os `registry:ui` assumem (`.eyebrow`, `.btn-primary`/`.btn-secondary`/`.btn-outline`, `.card-vstack`, `.gradient-text`, `font-display`, `font-mono`) e o keyframe `tech-scroll`. Fecha a lacuna: sem ele, os componentes ficam sem cor/raio/sombra. | `npx shadcn@latest add Vvs2705/vstack-registry/theme-base` |
 | `currency-input` | `registry:ui` | Input de moeda BRL com mascara automatica (acumulador de centavos); value canonico com ponto decimal, pronto para `parseFloat`/API e react-hook-form. Sem estilo proprio. | `npx shadcn@latest add Vvs2705/vstack-registry/currency-input` |
 | `empty-state` | `registry:ui` | Estado vazio padrao V-STACK: icone (Lottie opcional ou SVG), titulo em `font-display`, descricao e acao — so tokens semanticos shadcn. Requer `tailwindcss-animate`. | `npx shadcn@latest add Vvs2705/vstack-registry/empty-state` |
 | `container` | `registry:ui` | Container centralizado com gutters responsivos e largura maxima por prop (`md`/`lg`/`xl`). | `npx shadcn@latest add Vvs2705/vstack-registry/container` |
@@ -22,7 +23,16 @@ Registry [shadcn](https://ui.shadcn.com/docs/registry/github) da **V-STACK Solut
 ### Pre-requisitos dos componentes `registry:ui`
 
 - Projeto com **shadcn inicializado** (`components.json` + alias `@/lib/utils` com o helper `cn`) — os itens que usam `cn` declaram o registryDependency padrao `utils`, entao o shadcn resolve sozinho.
-- **Tokens CSS da V-STACK** no `globals.css` (`--bg`, `--bg-card`, `--bg-deep`, `--text-1..3`, `--border`, `--border-hover`, `--radius-card`, `--shadow`, `--shadow-sm`, `--accent-muted`, tokens de estado `success`/`danger`/`info`) e as utilities `.eyebrow`, `.btn-primary`, `.btn-outline`, `font-display` — tudo especificado no `DESIGN.md` (instale `design-conventions` e siga o brief).
+- **Tokens + utilities da V-STACK instalados via `theme-base`.** Os componentes `registry:ui` assumem as custom properties (`--bg`, `--bg-card`, `--bg-deep`, `--text-1..3`, `--border`, `--border-hover`, `--radius-card`, `--shadow`, `--shadow-sm`, `--accent-muted`, tokens de estado `success`/`warning`/`danger`/`info`) e as utilities `.eyebrow`, `.btn-primary`, `.btn-outline`, `font-display`. O item **`theme-base`** injeta tudo isso direto no seu CSS global — instale-o **antes (ou junto)** dos componentes:
+
+  ```bash
+  # sempre primeiro: a fundacao de tokens + utilities (light + dark)
+  npx shadcn@latest add Vvs2705/vstack-registry/theme-base
+  # depois os componentes que dependem dela
+  npx shadcn@latest add Vvs2705/vstack-registry/surface
+  ```
+
+  O `design-conventions` (`DESIGN.md`) continua sendo o **brief de restricoes** para agentes; o `theme-base` e a **fundacao executavel** que aterrissa os mesmos tokens no CSS.
 - `cta-section` usa `next/link` — apenas para produtos Next.js.
 
 ## Como consumir (qualquer produto V-STACK)
