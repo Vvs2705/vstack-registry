@@ -330,6 +330,102 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indicador de carregamento circular (border-spin) sem dependencias; aro na cor primary, trilha neutra, tamanhos sm/md/lg. Herda className.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "ProgressRing",
+      "description": "Anel de progresso/score em SVG (0–100) sem dependencias; cor por faixa (emerald/sky/amber/red), trilha no token border e valor numerico opcional no centro.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/progress-ring.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Linha do tempo vertical data-driven (sem dependencias): itens via prop (title, description, timestamp, icon, status), ponto colorido por status (normal/active/success/error). Toda a copy vem do consumidor.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "search-input",
+      "type": "registry:ui",
+      "title": "SearchInput",
+      "description": "Campo de busca com icone, botao de limpar e debounce configuravel (onSearch); foco no token primary. Sem copy fixa (placeholder por prop).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/search-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OtpInput",
+      "description": "Caixas de codigo OTP (default 6) sem dependencias: auto-foco, backspace inteligente e paste; aceita so digitos. Borda/foco nos tokens border/primary. Ideal para MFA e verificacao.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/otp-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-card",
+      "type": "registry:ui",
+      "title": "AlertCard",
+      "description": "Cartao de alerta com severidade (critical/warning/success/info), icone, acao opcional e dismiss opcional. Toda a copy vem por props.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/alert-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

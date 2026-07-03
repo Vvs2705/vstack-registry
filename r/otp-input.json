@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-input",
+  "title": "OtpInput",
+  "description": "Caixas de codigo OTP (default 6) sem dependencias: auto-foco, backspace inteligente e paste; aceita so digitos. Borda/foco nos tokens border/primary. Ideal para MFA e verificacao.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/otp-input.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface OtpInputProps {\n  /** Valor atual (string de digitos). */\n  value: string\n  /** Chamado quando o codigo muda. */\n  onChange: (value: string) => void\n  /** Quantidade de caixas. */\n  length?: number\n  disabled?: boolean\n  className?: string\n}\n\n/**\n * OtpInput — caixas de codigo OTP (default 6), sem dependencias.\n * Auto-foco entre caixas, backspace inteligente e colar (paste) suportados.\n * Aceita apenas digitos. Borda/foco usam tokens `border`/`primary`.\n */\nexport function OtpInput({ value, onChange, length = 6, disabled, className }: OtpInputProps) {\n  const inputs = React.useRef<(HTMLInputElement | null)[]>([])\n  const pad = ' '.repeat(length)\n  const digits = (value + pad).slice(0, length).split('')\n\n  const handleKey = (idx: number, e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === 'Backspace') {\n      e.preventDefault()\n      const next = digits.map((d, i) => (i === idx ? ' ' : d)).join('').trimEnd()\n      onChange(next.trim())\n      if (idx > 0) inputs.current[idx - 1]?.focus()\n    }\n  }\n\n  const handleChange = (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {\n    const ch = e.target.value.replace(/\\D/g, '').slice(-1)\n    if (!ch) return\n    const next = digits.map((d, i) => (i === idx ? ch : d)).join('').replace(/ /g, '')\n    onChange(next.padEnd(length, ' ').trim())\n    if (idx < length - 1) inputs.current[idx + 1]?.focus()\n  }\n\n  const handlePaste = (e: React.ClipboardEvent) => {\n    const text = e.clipboardData.getData('text').replace(/\\D/g, '').slice(0, length)\n    if (text.length > 0) {\n      onChange(text)\n      inputs.current[Math.min(text.length, length - 1)]?.focus()\n    }\n    e.preventDefault()\n  }\n\n  return (\n    <div className={cn('flex justify-center gap-2', className)} onPaste={handlePaste}>\n      {Array.from({ length }).map((_, idx) => (\n        <input\n          key={idx}\n          ref={(el) => {\n            inputs.current[idx] = el\n          }}\n          type=\"text\"\n          inputMode=\"numeric\"\n          maxLength={1}\n          value={digits[idx]?.trim() ?? ''}\n          onChange={(e) => handleChange(idx, e)}\n          onKeyDown={(e) => handleKey(idx, e)}\n          disabled={disabled}\n          className={cn(\n            'h-14 w-12 rounded-xl border-2 bg-background text-center text-xl font-bold text-foreground outline-none transition-all duration-150',\n            'border-border focus:border-primary focus:ring-2 focus:ring-primary/20',\n            disabled && 'cursor-not-allowed opacity-50',\n          )}\n          autoComplete=\"one-time-code\"\n          aria-label={`Digito ${idx + 1} do codigo`}\n        />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-card",
+  "title": "AlertCard",
+  "description": "Cartao de alerta com severidade (critical/warning/success/info), icone, acao opcional e dismiss opcional. Toda a copy vem por props.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/alert-card.tsx",
+      "content": "import * as React from 'react'\nimport { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react'\nimport { cn } from '@/lib/utils'\n\nexport type AlertSeverity = 'critical' | 'warning' | 'success' | 'info'\n\nexport interface AlertCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  title: string\n  description: string\n  severity?: AlertSeverity\n  /** Exibe botao de fechar quando informado. */\n  onClose?: () => void\n  /** Rotulo do botao de acao (opcional). */\n  actionLabel?: string\n  onAction?: () => void\n}\n\n/**\n * AlertCard — cartao de alerta com severidade (critical/warning/success/info),\n * icone, acao opcional e dismiss opcional. Toda a copy vem por props.\n * Cores por severidade usam a paleta neutra (red/amber/green/blue) em light e dark.\n */\nexport function AlertCard({\n  title,\n  description,\n  severity = 'info',\n  onClose,\n  actionLabel,\n  onAction,\n  className,\n  ...props\n}: AlertCardProps) {\n  const styles = {\n    critical: {\n      card: 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900/50 text-red-900 dark:text-red-200',\n      icon: <AlertCircle className=\"h-5 w-5 text-red-500\" />,\n      action: 'text-red-700 hover:bg-red-100 dark:text-red-400 dark:hover:bg-red-950/40',\n    },\n    warning: {\n      card: 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50 text-amber-900 dark:text-amber-200',\n      icon: <AlertTriangle className=\"h-5 w-5 text-amber-500\" />,\n      action: 'text-amber-700 hover:bg-amber-100 dark:text-amber-400 dark:hover:bg-amber-950/40',\n    },\n    success: {\n      card: 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900/50 text-green-900 dark:text-green-200',\n      icon: <CheckCircle className=\"h-5 w-5 text-green-500\" />,\n      action: 'text-green-700 hover:bg-green-100 dark:text-green-400 dark:hover:bg-green-950/40',\n    },\n    info: {\n      card: 'bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/50 text-blue-900 dark:text-blue-200',\n      icon: <Info className=\"h-5 w-5 text-blue-500\" />,\n      action: 'text-blue-700 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-950/40',\n    },\n  }[severity]\n\n  return (\n    <div\n      className={cn(\n        'relative flex gap-3 overflow-hidden rounded-lg border p-4 shadow-sm transition-all duration-300',\n        styles.card,\n        className,\n      )}\n      role=\"alert\"\n      {...props}\n    >\n      <div className=\"mt-0.5 flex-shrink-0\">{styles.icon}</div>\n      <div className=\"flex-grow space-y-1\">\n        <h4 className=\"text-sm font-semibold leading-none\">{title}</h4>\n        <p className=\"text-xs font-medium leading-relaxed opacity-90\">{description}</p>\n        {actionLabel && onAction && (\n          <button\n            type=\"button\"\n            onClick={onAction}\n            className={cn(\n              'mt-2 select-none rounded-md border border-current/25 px-2.5 py-1 text-xs font-semibold transition-all duration-200',\n              styles.action,\n            )}\n          >\n            {actionLabel}\n          </button>\n        )}\n      </div>\n      {onClose && (\n        <button\n          type=\"button\"\n          onClick={onClose}\n          className=\"flex-shrink-0 self-start rounded-full p-1 opacity-65 transition-opacity hover:bg-black/5 hover:opacity-100 dark:hover:bg-white/5\"\n          aria-label=\"Fechar alerta\"\n        >\n          <X className=\"h-4 w-4\" />\n        </button>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

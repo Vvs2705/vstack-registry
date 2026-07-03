@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "title": "Spinner",
+  "description": "Indicador de carregamento circular (border-spin) sem dependencias; aro na cor primary, trilha neutra, tamanhos sm/md/lg. Herda className.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/spinner.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {\n  size?: 'sm' | 'md' | 'lg'\n}\n\n/**\n * Spinner — indicador de carregamento circular (border-spin), sem dependencias.\n * O aro usa a cor `primary`; a trilha usa `slate` neutro (light/dark). Tamanhos sm/md/lg.\n */\nexport function Spinner({ size = 'md', className, ...props }: SpinnerProps) {\n  const sizeClasses = {\n    sm: 'w-4 h-4 border-2',\n    md: 'w-6 h-6 border-2',\n    lg: 'w-10 h-10 border-[3px]',\n  }\n\n  return (\n    <div\n      role=\"status\"\n      aria-label=\"Carregando\"\n      className={cn(\n        'inline-block animate-spin rounded-full border-primary border-t-transparent',\n        sizeClasses[size],\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

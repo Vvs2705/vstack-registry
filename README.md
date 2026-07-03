@@ -19,6 +19,12 @@ Registry [shadcn](https://ui.shadcn.com/docs/registry/github) da **V-STACK Solut
 | `cta-section` | `registry:ui` | Secao final de CTA com entrada animada on-scroll, glow radial e ate dois botoes — toda a copy vem por props. Puxa `container` e `section` automaticamente. Requer Next.js. | `npx shadcn@latest add Vvs2705/vstack-registry/cta-section` |
 | `animations` | `registry:ui` | Primitivos de animacao on-scroll (framer-motion): `FadeInUp`, `SlideIn`, `StaggerContainer`/`StaggerItem`, `PulseLabel`, `CountUp`, `AnimatedSection` + variants. | `npx shadcn@latest add Vvs2705/vstack-registry/animations` |
 | `toast` | `registry:ui` | Toast leve sem provider: `toast()` via event bus + `ToastContainer`, tipos `success`/`error`/`info` nos tokens de estado. | `npx shadcn@latest add Vvs2705/vstack-registry/toast` |
+| `spinner` | `registry:ui` | Indicador de carregamento circular (border-spin) sem dependencias; aro na cor `primary`, trilha neutra, tamanhos `sm`/`md`/`lg`. | `npx shadcn@latest add Vvs2705/vstack-registry/spinner` |
+| `progress-ring` | `registry:ui` | Anel de progresso/score em SVG (0–100) sem dependencias; cor por faixa (emerald/sky/amber/red), trilha no token `border`, valor central opcional. | `npx shadcn@latest add Vvs2705/vstack-registry/progress-ring` |
+| `timeline` | `registry:ui` | Linha do tempo vertical data-driven: itens via prop (title/description/timestamp/icon/status), ponto colorido por status. Sem dependencias, copy do consumidor. | `npx shadcn@latest add Vvs2705/vstack-registry/timeline` |
+| `search-input` | `registry:ui` | Campo de busca com icone, botao limpar e debounce (`onSearch`); foco no token `primary`. Placeholder por prop. Requer `lucide-react`. | `npx shadcn@latest add Vvs2705/vstack-registry/search-input` |
+| `otp-input` | `registry:ui` | Caixas de codigo OTP (default 6) sem dependencias: auto-foco, backspace inteligente e paste; so digitos. Ideal para MFA/verificacao. | `npx shadcn@latest add Vvs2705/vstack-registry/otp-input` |
+| `alert-card` | `registry:ui` | Cartao de alerta com severidade (`critical`/`warning`/`success`/`info`), icone, acao e dismiss opcionais — toda a copy por props. Requer `lucide-react`. | `npx shadcn@latest add Vvs2705/vstack-registry/alert-card` |
 
 ### Pre-requisitos dos componentes `registry:ui`
 
