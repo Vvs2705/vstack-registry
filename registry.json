@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "vstack",
+  "homepage": "https://github.com/Vvs2705/vstack-registry",
+  "items": [
+    {
+      "name": "design-conventions",
+      "type": "registry:item",
+      "title": "V-STACK Design Conventions",
+      "description": "Fonte da verdade do design system da V-STACK Solutions (DESIGN.md): tokens semanticos (accent laranja, superficies, texto, raio, sombra), tipografia Syne/Geist/JetBrains Mono e regras anti-generico. Instala o DESIGN.md na raiz do projeto consumidor.",
+      "files": [
+        {
+          "path": "DESIGN.md",
+          "type": "registry:file",
+          "target": "~/DESIGN.md"
+        }
+      ]
+    }
+  ]
+}
