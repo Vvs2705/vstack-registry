@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast",
+  "title": "Toast",
+  "description": "Toast leve sem provider: funcao toast() via event bus global + ToastContainer com AnimatePresence, tipos success/error/info mapeados aos tokens de estado.",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/toast.tsx",
+      "content": "'use client'\r\n\r\nimport { useEffect, useState, useCallback } from 'react'\r\nimport { CheckCircle2, AlertCircle, X, Info } from 'lucide-react'\r\nimport { motion, AnimatePresence } from 'framer-motion'\r\n\r\nexport type ToastType = 'success' | 'error' | 'info'\r\n\r\ninterface ToastItem {\r\n  id: string\r\n  message: string\r\n  type: ToastType\r\n}\r\n\r\n// Global event bus for toasts — avoids React context overhead for simple notifications\r\nconst listeners = new Set<(toast: ToastItem) => void>()\r\n\r\nexport function toast(message: string, type: ToastType = 'success') {\r\n  const item: ToastItem = { id: Math.random().toString(36).slice(2), message, type }\r\n  listeners.forEach((fn) => fn(item))\r\n}\r\n\r\nconst ICONS: Record<ToastType, typeof CheckCircle2> = {\r\n  success: CheckCircle2,\r\n  error: AlertCircle,\r\n  info: Info,\r\n}\r\n\r\nconst COLORS: Record<ToastType, string> = {\r\n  success: 'text-success',\r\n  error: 'text-danger',\r\n  info: 'text-info',\r\n}\r\n\r\nexport function ToastContainer() {\r\n  const [items, setItems] = useState<ToastItem[]>([])\r\n\r\n  const add = useCallback((item: ToastItem) => {\r\n    setItems((prev) => [...prev, item])\r\n    setTimeout(() => {\r\n      setItems((prev) => prev.filter((i) => i.id !== item.id))\r\n    }, 4000)\r\n  }, [])\r\n\r\n  const remove = useCallback((id: string) => {\r\n    setItems((prev) => prev.filter((i) => i.id !== id))\r\n  }, [])\r\n\r\n  useEffect(() => {\r\n    listeners.add(add)\r\n    return () => { listeners.delete(add) }\r\n  }, [add])\r\n\r\n  return (\r\n    <div\r\n      aria-live=\"polite\"\r\n      aria-label=\"Notificações\"\r\n      className=\"fixed bottom-6 right-6 z-[100] flex flex-col gap-2\"\r\n    >\r\n      <AnimatePresence mode=\"popLayout\">\r\n        {items.map((item) => {\r\n          const Icon = ICONS[item.type]\r\n          return (\r\n            <motion.div\r\n              key={item.id}\r\n              initial={{ opacity: 0, y: 24, scale: 0.94 }}\r\n              animate={{ opacity: 1, y: 0, scale: 1 }}\r\n              exit={{ opacity: 0, y: 12, scale: 0.96 }}\r\n              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}\r\n              className=\"flex max-w-sm items-start gap-3 rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3.5 shadow-[var(--shadow)]\"\r\n              role=\"alert\"\r\n            >\r\n              <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${COLORS[item.type]}`} aria-hidden=\"true\" />\r\n              <p className=\"flex-1 text-[13px] font-medium text-[var(--text-1)]\">{item.message}</p>\r\n              <button\r\n                onClick={() => remove(item.id)}\r\n                className=\"ml-1 text-[var(--text-3)] transition-colors hover:text-[var(--text-1)]\"\r\n                aria-label=\"Fechar notificação\"\r\n              >\r\n                <X className=\"h-3.5 w-3.5\" aria-hidden=\"true\" />\r\n              </button>\r\n            </motion.div>\r\n          )\r\n        })}\r\n      </AnimatePresence>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

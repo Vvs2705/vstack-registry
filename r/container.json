@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "container",
+  "title": "Container",
+  "description": "Container centralizado com gutters responsivos e largura maxima por prop (md/lg/xl) no padrao V-STACK.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/container.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from 'react'\r\nimport { cn } from '@/lib/utils'\r\n\r\ntype ContainerSize = 'md' | 'lg' | 'xl'\r\n\r\nconst containerSizes: Record<ContainerSize, string> = {\r\n  md: 'max-w-4xl',\r\n  lg: 'max-w-6xl',\r\n  xl: 'max-w-7xl',\r\n}\r\n\r\ninterface ContainerProps extends ComponentPropsWithoutRef<'div'> {\r\n  size?: ContainerSize\r\n}\r\n\r\n/**\r\n * Container centralizado com gutters responsivos no padrao V-STACK.\r\n * `size` controla a largura maxima (md=4xl, lg=6xl, xl=7xl).\r\n */\r\nexport function Container({ size = 'xl', className, ...props }: ContainerProps) {\r\n  return (\r\n    <div\r\n      className={cn('mx-auto w-full px-5 sm:px-6 lg:px-8', containerSizes[size], className)}\r\n      {...props}\r\n    />\r\n  )\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section",
+  "title": "Section",
+  "description": "Secao de pagina com tom de fundo (default/muted/deep) e ritmo vertical (md/lg/xl) padronizados pelos tokens V-STACK.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/section.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from 'react'\r\nimport { cn } from '@/lib/utils'\r\n\r\ntype SectionTone = 'default' | 'muted' | 'deep'\r\ntype SectionSpacing = 'md' | 'lg' | 'xl'\r\n\r\nconst sectionTones: Record<SectionTone, string> = {\r\n  default: 'bg-[var(--bg)]',\r\n  muted: 'bg-[var(--bg-card)]',\r\n  deep: 'bg-[var(--bg-deep)]',\r\n}\r\n\r\nconst sectionSpacing: Record<SectionSpacing, string> = {\r\n  md: 'py-16 sm:py-20',\r\n  lg: 'py-20 sm:py-24',\r\n  xl: 'py-24 sm:py-32',\r\n}\r\n\r\ninterface SectionProps extends ComponentPropsWithoutRef<'section'> {\r\n  tone?: SectionTone\r\n  spacing?: SectionSpacing\r\n}\r\n\r\n/**\r\n * Secao de pagina com tom de fundo e ritmo vertical padronizados.\r\n * Requer os tokens CSS da V-STACK (`--bg`, `--bg-card`, `--bg-deep`) — ver DESIGN.md.\r\n */\r\nexport function Section({ tone = 'default', spacing = 'lg', className, ...props }: SectionProps) {\r\n  return <section className={cn(sectionTones[tone], sectionSpacing[spacing], className)} {...props} />\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

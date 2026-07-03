@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "surface",
+  "title": "Surface",
+  "description": "Superficie elevada (card) com borda, raio e sombra por token, hover de elevacao opcional (interactive) e elemento polimorfico via as.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/surface.tsx",
+      "content": "import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'\r\nimport { cn } from '@/lib/utils'\r\n\r\ntype SurfaceProps<T extends ElementType = 'div'> = {\r\n  as?: T\r\n  interactive?: boolean\r\n  className?: string\r\n  children?: ReactNode\r\n} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'className' | 'children'>\r\n\r\n/**\r\n * Superficie elevada (card) no padrao V-STACK: borda, raio e sombra por token.\r\n * `interactive` adiciona hover de elevacao. Polimorfico via `as`.\r\n * Requer os tokens CSS da V-STACK (`--radius-card`, `--border`, `--bg-card`,\r\n * `--shadow-sm`, `--shadow`, `--border-hover`) — ver DESIGN.md.\r\n */\r\nexport function Surface<T extends ElementType = 'div'>({\r\n  as,\r\n  interactive = false,\r\n  className,\r\n  ...props\r\n}: SurfaceProps<T>) {\r\n  const Component: ElementType = as ?? 'div'\r\n\r\n  return (\r\n    <Component\r\n      className={cn(\r\n        'rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)]',\r\n        interactive &&\r\n          'transition duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)] hover:shadow-[var(--shadow)]',\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  )\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

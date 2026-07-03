@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-header",
+  "title": "SectionHeader",
+  "description": "Cabecalho de secao no padrao V-STACK: eyebrow + titulo + descricao, com alinhamento left/center.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/section-header.tsx",
+      "content": "import type { ReactNode } from 'react'\r\nimport { cn } from '@/lib/utils'\r\n\r\ninterface SectionHeaderProps {\r\n  eyebrow?: string\r\n  title: ReactNode\r\n  description?: ReactNode\r\n  align?: 'left' | 'center'\r\n  className?: string\r\n}\r\n\r\n/**\r\n * Cabecalho de secao no padrao V-STACK: eyebrow + titulo + descricao.\r\n * Requer os tokens CSS da V-STACK (`--text-1`, `--text-2`) e as utilities\r\n * `.eyebrow` e `font-display` — ver DESIGN.md.\r\n */\r\nexport function SectionHeader({\r\n  eyebrow,\r\n  title,\r\n  description,\r\n  align = 'left',\r\n  className,\r\n}: SectionHeaderProps) {\r\n  return (\r\n    <div className={cn(align === 'center' && 'mx-auto text-center', 'max-w-2xl', className)}>\r\n      {eyebrow && <p className=\"eyebrow mb-3\">{eyebrow}</p>}\r\n      <h2 className=\"font-display text-balance text-3xl font-bold leading-tight tracking-[-0.01em] text-[var(--text-1)] sm:text-4xl\">\r\n        {title}\r\n      </h2>\r\n      {description && (\r\n        <p className=\"mt-4 text-pretty text-[15px] leading-7 text-[var(--text-2)]\">\r\n          {description}\r\n        </p>\r\n      )}\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

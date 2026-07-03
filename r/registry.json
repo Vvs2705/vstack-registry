@@ -47,6 +47,101 @@
           "target": "components/ui/empty-state.tsx"
         }
       ]
+    },
+    {
+      "name": "container",
+      "type": "registry:ui",
+      "title": "Container",
+      "description": "Container centralizado com gutters responsivos e largura maxima por prop (md/lg/xl) no padrao V-STACK.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/container.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "section",
+      "type": "registry:ui",
+      "title": "Section",
+      "description": "Secao de pagina com tom de fundo (default/muted/deep) e ritmo vertical (md/lg/xl) padronizados pelos tokens V-STACK.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/section.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "section-header",
+      "type": "registry:ui",
+      "title": "SectionHeader",
+      "description": "Cabecalho de secao no padrao V-STACK: eyebrow + titulo + descricao, com alinhamento left/center.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/section-header.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "surface",
+      "type": "registry:ui",
+      "title": "Surface",
+      "description": "Superficie elevada (card) com borda, raio e sombra por token, hover de elevacao opcional (interactive) e elemento polimorfico via as.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/surface.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "cta-section",
+      "type": "registry:ui",
+      "title": "CTASection",
+      "description": "Secao final de call-to-action com entrada animada on-scroll, glow radial sutil e ate dois CTAs. Toda a copy vem por props. Requer Next.js (next/link).",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "registryDependencies": [
+        "Vvs2705/vstack-registry/container",
+        "Vvs2705/vstack-registry/section"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/cta-section.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "animations",
+      "type": "registry:ui",
+      "title": "Animations",
+      "description": "Primitivos de animacao on-scroll da V-STACK (framer-motion): FadeInUp, SlideIn, StaggerContainer/StaggerItem, PulseLabel, CountUp, AnimatedSection e variants compartilhados.",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "path": "registry/ui/animations.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Toast leve sem provider: funcao toast() via event bus global + ToastContainer com AnimatePresence, tipos success/error/info mapeados aos tokens de estado.",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
