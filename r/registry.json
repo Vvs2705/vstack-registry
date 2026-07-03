@@ -26,6 +26,11 @@
           "path": "registry/currency-input/CurrencyInput.tsx",
           "type": "registry:ui",
           "target": "components/ui/CurrencyInput.tsx"
+        },
+        {
+          "path": "registry/currency-input/currency.ts",
+          "type": "registry:lib",
+          "target": "lib/currency.ts"
         }
       ]
     },
