@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "title": "Empty State",
+  "description": "Estado vazio padrao V-STACK: icone (Lottie opcional ou SVG), titulo em font-display, descricao e acao. Usa apenas tokens semanticos shadcn (text-primary/foreground/muted-foreground) — a identidade vem do mapeamento de tokens do consumidor. Requer tailwindcss-animate (animate-in).",
+  "dependencies": [
+    "lottie-react"
+  ],
+  "files": [
+    {
+      "path": "registry/empty-state/empty-state.tsx",
+      "content": "\"use client\";\n\nimport dynamic from \"next/dynamic\";\nimport type { ReactNode } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// Carregado só no cliente e só quando há animationData (telas com fallback SVG\n// não pagam o custo do Lottie no bundle).\nconst Lottie = dynamic(() => import(\"lottie-react\"), { ssr: false });\n\ninterface EmptyStateProps {\n  title: string;\n  description?: string;\n  action?: ReactNode;\n  /**\n   * animationData de um Lottie (ex.: import de `/public/lottie/empty-state.json`).\n   * Quando ausente, renderiza o fallback SVG (gota de tinta) com pulso sutil.\n   */\n  lottie?: unknown;\n  /** Ícone SVG customizado no lugar da gota padrão (fallback quando sem lottie). */\n  icon?: ReactNode;\n  className?: string;\n}\n\n/**\n * Estado vazio padrão V-STACK — para telas sem registros (sem clientes, sem\n * lançamentos, sem resultados etc.).\n *\n * Usa apenas tokens semânticos shadcn (`text-primary`, `text-foreground`,\n * `text-muted-foreground`, `font-display`) — a identidade de cada produto\n * entra via mapeamento de tokens do consumidor, não aqui.\n */\nexport function EmptyState({\n  title,\n  description,\n  action,\n  lottie,\n  icon,\n  className,\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center text-center\",\n        \"px-6 py-14 animate-in fade-in slide-in-from-bottom-1 duration-300\",\n        className,\n      )}\n    >\n      <div className=\"mb-5 h-16 w-16 text-primary\">\n        {lottie ? (\n          // eslint-disable-next-line @typescript-eslint/no-explicit-any\n          <Lottie animationData={lottie as any} loop className=\"h-full w-full\" />\n        ) : (\n          icon ?? (\n            <svg\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              strokeWidth=\"1.4\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n              className=\"h-full w-full opacity-80 motion-safe:animate-pulse\"\n              aria-hidden=\"true\"\n            >\n              <path d=\"M12 3c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0C7 9.5 9 7 12 3z\" />\n              <path d=\"M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5\" />\n            </svg>\n          )\n        )}\n      </div>\n\n      <h3 className=\"font-display text-xl text-foreground\">{title}</h3>\n      {description ? (\n        <p className=\"mt-1.5 max-w-sm text-sm text-muted-foreground\">{description}</p>\n      ) : null}\n      {action ? <div className=\"mt-6\">{action}</div> : null}\n    </div>\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/empty-state.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
