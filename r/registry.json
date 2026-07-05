@@ -205,6 +205,20 @@
       ]
     },
     {
+      "name": "search-modal",
+      "type": "registry:ui",
+      "title": "Search Modal",
+      "description": "Modal de busca global (Ctrl+K) com debounce 300ms, resultados agrupados, navegacao por teclado (setas/Enter/Esc) e contagem no rodape. Generico por config: grupos (label/icone/cores) e callbacks onSearch/onSelect vem do consumidor. Apenas tokens semanticos shadcn.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "registry/search-modal/search-modal.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/search-modal.tsx"
+        }
+      ]
+    },
+    {
       "name": "empty-state",
       "type": "registry:ui",
       "title": "Empty State",
